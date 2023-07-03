@@ -4,13 +4,11 @@ import * as dotenv from "dotenv";
 dotenv.config();
 import cors from "cors";
 import mongoose from "mongoose";
+import authRoutes from "./routes/authRoutes.js";
 
 app.use(cors());
 
-//this is dummy root for testing
-app.get("/api/v1", (req, res) => {
-  res.send("Hello Frontend this is Backend!");
-});
+app.use("/api/v1/auth/", authRoutes);
 
 // connection with DB
 const port = process.env.PORT || 4000;
