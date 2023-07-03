@@ -9,15 +9,21 @@ const App = () => {
     setResponse(data);
   };
   return (
-    <>
-      <h1>This is Frontend</h1>
-      <p className="text-3xl font-bold underline">
-        {response ? response : "Call backend"}
-      </p>
-      <button type="button" onClick={handleRequest}>
-        Call Backend
-      </button>
-    </>
+    <div className="w-screen h-screen grid place-content-center">
+      <div className="w-[650px] grid place-content-center">
+        <h1>This is Frontend</h1>
+        <p className="text-3xl font-bold underline">
+          {response ? response : "Call backend"}
+        </p>
+        <button
+          className="border-2 p-[5px] rounded-md"
+          type="button"
+          onClick={handleRequest}
+        >
+          Call Backend
+        </button>
+      </div>
+    </div>
   );
 };
 
