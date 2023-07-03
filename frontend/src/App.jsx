@@ -1,22 +1,25 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import LandingPage from "../pages/LandingPage";
+import StartLayout from "../pages/StartLayout";
+import ErrorPage from "../pages/ErrorPage";
+import RegisterPage from "../pages/RegisterPage";
+import LoginPage from "../pages/LoginPage";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <StartLayout />,
+    errorElement: <ErrorPage />,
+    children: [
+      { index: true, element: <LandingPage /> },
+      { path: "register", element: <RegisterPage /> },
+      { path: "login", element: <LoginPage /> },
+    ],
+  },
+]);
 
 const App = () => {
-  return (
-    <div className="w-screen h-screen grid place-content-center circle-blue">
-      <div className="bg-emerald-500 w-52 h-52 rounded-full shadow-2xl grid place-content-center">
-        <div className="bg-teal-200 w-32 h-32 rounded-full shadow-2xl grid place-content-center">
-          <div className="bg-red-500 w-16 h-16 rounded-full shadow-2xl grid place-content-center">
-            <h1 className="text-center">
-              Social
-              <br />
-              App
-            </h1>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+  return <RouterProvider router={router} />;
 };
 
 export default App;
