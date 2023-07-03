@@ -19,8 +19,7 @@ This command will start frontend and backend in same time.
 
 ## Main technologies used in this application
 
-Tailwind CSS
-React.js (Vite)
-Node.js
-Express.js
-and others...
+- Tailwind CSS,
+- React.js (Vite),
+- Node.js,
+- Express.js and others...
