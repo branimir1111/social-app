@@ -2,3 +2,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+#mainLinks a.active {
+  color: #8b5cf6;
+}
