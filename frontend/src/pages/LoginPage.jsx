@@ -61,13 +61,13 @@ const LoginPage = () => {
             <div className="flex  gap-4 max-md:flex-col">
               <button
                 type="submit"
-                className="cursor-pointer w-full rounded-[3px] px-[3px] py-2 bg-violet-400 hover:bg-violet-500 transition-all duration-300 capitalize tracking-widest"
+                className="cursor-pointer w-full rounded-[3px] px-[3px] py-2 bg-violet-500 hover:bg-violet-400 transition-all duration-300 capitalize tracking-widest"
               >
                 Demo Admin
               </button>
               <button
                 type="submit"
-                className="cursor-pointer w-full rounded-[3px] px-[3px] py-2 bg-violet-400 hover:bg-violet-500 transition-all duration-300 capitalize tracking-widest"
+                className="cursor-pointer w-full rounded-[3px] px-[3px] py-2 bg-violet-500 hover:bg-violet-400 transition-all duration-300 capitalize tracking-widest"
               >
                 Demo User
               </button>
