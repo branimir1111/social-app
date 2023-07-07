@@ -1,7 +1,7 @@
 const HomePage = () => {
   return (
     <main className="w-[1280px] flex justify-center px-4 bg-orange-200">
-      HomePage
+      <h1>This is home page.</h1>
     </main>
   );
 };
