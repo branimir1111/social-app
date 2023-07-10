@@ -49,6 +49,9 @@ const RegisterPage = () => {
     },
   });
 
+  const showError = (name) =>
+    formik.errors[name] && formik.touched[name] && formik.errors[name];
+
   return (
     <div className="w-full h-full max-md:py-2 md:py-4 flex justify-center items-center">
       <div className="w-[400px] bg-[#333333] rounded-[5px] p-[15px] text-white  max-md:w-11/12">
@@ -61,40 +64,68 @@ const RegisterPage = () => {
         {/* single form row */}
         <form onSubmit={formik.handleSubmit}>
           <div className="mt-[10px] flex flex-col gap-2">
-            <label className="">First Name</label>
+            <label className="">
+              First Name{" "}
+              <span className="text-pink-500 italic text-sm">
+                {showError("firstName")}
+              </span>
+            </label>
             <input
               type="text"
               name="firstName"
+              value={formik.values.firstName}
+              onChange={formik.handleChange}
               placeholder="Enter first name"
               className="w-full rounded-[3px] px-[5px] py-[3px] bg-[#5a5a5a]"
             />
           </div>
           {/* single form row */}
           <div className="mt-[10px] flex flex-col gap-2">
-            <label className="">Last Name</label>
+            <label className="">
+              Last Name{" "}
+              <span className="text-pink-500 italic text-sm">
+                {showError("lastName")}
+              </span>
+            </label>
             <input
               type="text"
               name="lastName"
+              value={formik.values.lastName}
+              onChange={formik.handleChange}
               placeholder="Enter last name"
               className="w-full rounded-[3px]  px-[5px] py-[3px] bg-[#5a5a5a]"
             />
           </div>
           {/* single form row */}
           <div className="mt-[10px] flex flex-col gap-2">
-            <label>Email</label>
+            <label>
+              Email{" "}
+              <span className="text-pink-500 italic text-sm">
+                {showError("email")}
+              </span>
+            </label>
             <input
               type="email"
               name="email"
+              value={formik.values.email}
+              onChange={formik.handleChange}
               placeholder="Enter email"
               className="w-full rounded-[3px]  px-[5px] py-[3px] bg-[#5a5a5a]"
             />
           </div>
           {/* single form row */}
           <div className="relative mt-[10px] flex flex-col gap-2">
-            <label>Password</label>
+            <label>
+              Password{" "}
+              <span className="text-pink-500 italic text-sm">
+                {showError("password")}
+              </span>
+            </label>
             <input
               type={`${viewPass ? "password" : "text"}`}
               name="password"
+              value={formik.values.password}
+              onChange={formik.handleChange}
               placeholder="Enter password"
               className="w-full rounded-[3px]  px-[5px] py-[3px] bg-[#5a5a5a]"
             />
@@ -107,10 +138,17 @@ const RegisterPage = () => {
           </div>
           {/* single form row */}
           <div className="relative mt-[10px] flex flex-col gap-2">
-            <label>Confirm Password</label>
+            <label>
+              Confirm Password{" "}
+              <span className="text-pink-500 italic text-sm">
+                {showError("confirmPassword")}
+              </span>
+            </label>
             <input
               type={`${viewConfPass ? "password" : "text"}`}
               name="confirmPassword"
+              value={formik.values.confirmPassword}
+              onChange={formik.handleChange}
               placeholder="Confirm password"
               className="w-full rounded-[3px]  px-[5px] py-[3px] bg-[#5a5a5a]"
             />
@@ -123,9 +161,16 @@ const RegisterPage = () => {
           </div>
           {/* single form row */}
           <div className="mt-[10px] flex flex-col gap-2">
-            <label>Gender</label>
+            <label>
+              Gender{" "}
+              <span className="text-pink-500 italic text-sm">
+                {showError("gender")}
+              </span>
+            </label>
             <select
               name="gender"
+              value={formik.values.gender}
+              onChange={formik.handleChange}
               className="w-full rounded-[3px]  px-[5px] py-[5px] bg-[#5a5a5a]"
             >
               <option value="" defaultChecked>
@@ -137,19 +182,34 @@ const RegisterPage = () => {
           </div>
           {/* single form row */}
           <div className="mt-[10px] flex flex-col gap-2">
-            <label>Image</label>
+            <label>
+              Image{" "}
+              <span className="text-pink-500 italic text-sm">
+                {showError("image")}
+              </span>
+            </label>
             <input
               type="file"
               name="image"
+              onChange={(e) =>
+                formik.setFieldValue(e.target.name, e.target.files[0])
+              }
               className="cursor-pointer w-full rounded-[3px]  px-[5px] py-[3px] bg-[#5a5a5a]"
             />
           </div>
           {/* single form row */}
           <div className="mt-[10px] flex flex-col gap-2">
-            <label>Birth Date</label>
+            <label>
+              Birth Date{" "}
+              <span className="text-pink-500 italic text-sm">
+                {showError("birthDate")}
+              </span>
+            </label>
             <input
               type="date"
               name="birthDate"
+              value={formik.values.birthDate}
+              onChange={formik.handleChange}
               className="cursor-pointer w-full rounded-[3px]  px-[5px] py-[3px] bg-[#5a5a5a]"
             />
           </div>
