@@ -1,20 +1,56 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { PiEyeBold, PiEyeClosedBold } from "react-icons/pi";
+import { toast } from "react-toastify";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 const RegisterPage = () => {
   const [viewPass, setViewPass] = useState(true);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+  const [viewConfPass, setViewConfPass] = useState(true);
 
   const handleViewPass = () => {
     return setViewPass(!viewPass);
   };
+  const handleViewConfPass = () => {
+    return setViewConfPass(!viewConfPass);
+  };
+
+  const registerSchema = Yup.object().shape({
+    firstName: Yup.string().required("Required"),
+    lastName: Yup.string().required("Required"),
+    email: Yup.string().required("Required"),
+    password: Yup.string().required("Required"),
+    confirmPassword: Yup.string()
+      .required("Required")
+      .test("passwords-match", "Passwords must match", function (value) {
+        return this.parent.password === value;
+      }),
+    gender: Yup.string().required("Required"),
+    image: Yup.string().required("Required"),
+    birthDate: Yup.string().required("Required"),
+  });
+
+  const formik = useFormik({
+    initialValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+      gender: "",
+      image: "",
+      birthDate: "",
+    },
+    validationSchema: registerSchema,
+    onSubmit: (values) => {
+      toast.success("Submit is OK!");
+      formik.resetForm();
+    },
+  });
 
   return (
-    <div className="w-full h-full py-2 flex justify-center items-center">
+    <div className="w-full h-full max-md:py-2 md:py-4 flex justify-center items-center">
       <div className="w-[400px] bg-[#333333] rounded-[5px] p-[15px] text-white  max-md:w-11/12">
         {/* logo */}
         <div className="text-[3rem] text-center">
@@ -23,7 +59,7 @@ const RegisterPage = () => {
         {/* title  */}
         <h1 className="text-[2rem] text-violet-400 text-center">Register</h1>
         {/* single form row */}
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={formik.handleSubmit}>
           <div className="mt-[10px] flex flex-col gap-2">
             <label className="">First Name</label>
             <input
@@ -67,6 +103,22 @@ const RegisterPage = () => {
               onClick={handleViewPass}
             >
               {viewPass ? <PiEyeBold /> : <PiEyeClosedBold />}
+            </button>
+          </div>
+          {/* single form row */}
+          <div className="relative mt-[10px] flex flex-col gap-2">
+            <label>Confirm Password</label>
+            <input
+              type={`${viewConfPass ? "password" : "text"}`}
+              name="confirmPassword"
+              placeholder="Confirm password"
+              className="w-full rounded-[3px]  px-[5px] py-[3px] bg-[#5a5a5a]"
+            />
+            <button
+              className="absolute text-[20px] bottom-[5px] right-3 cursor-pointer  hover:text-violet-300 hover:transition-all hover:duration-300"
+              onClick={handleViewConfPass}
+            >
+              {viewConfPass ? <PiEyeBold /> : <PiEyeClosedBold />}
             </button>
           </div>
           {/* single form row */}
