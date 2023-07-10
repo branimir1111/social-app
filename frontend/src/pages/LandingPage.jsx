@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 
 const LandingPage = () => {
   return (
-    <div className="w-screen h-screen flex justify-center items-center">
+    <div className="w-full h-full py-2 flex justify-center items-center my-auto">
       <div className="bg-[#333333] w-[600px] h-3/6 rounded-[5px] grid justify-center items-end p-8 max-sm:w-11/12  max-sm:h-4/6">
         <div className="text-[3rem] mx-auto">🕸️</div>
         <h1 className="text-[3rem] text-white text-center">
           {" "}
           Spider <span className="text-violet-500">Web</span> App
         </h1>
-        <h3 className=" text-white text-center">
+        <h3 className=" text-white text-center max-md:mb-2 md:mb-8">
           {" "}
           I'm baby wayfarers hoodie next level taiyaki brooklyn cliche blue
           bottle single-origin coffee chia. Aesthetic post-ironic venmo, quinoa

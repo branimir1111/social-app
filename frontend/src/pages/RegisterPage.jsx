@@ -14,7 +14,7 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="w-screen h-screen flex justify-center items-center">
+    <div className="w-full h-full py-2 flex justify-center items-center">
       <div className="w-[400px] bg-[#333333] rounded-[5px] p-[15px] text-white  max-md:w-11/12">
         {/* logo */}
         <div className="text-[3rem] text-center">
