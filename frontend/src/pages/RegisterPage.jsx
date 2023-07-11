@@ -4,6 +4,10 @@ import { PiEyeBold, PiEyeClosedBold } from "react-icons/pi";
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { FileParser } from "../utils/FileParser";
+import axios from "axios";
+
+const baseUrl = "http://localhost:4000/api/v1";
 
 const RegisterPage = () => {
   const [viewPass, setViewPass] = useState(true);
@@ -20,7 +24,7 @@ const RegisterPage = () => {
     firstName: Yup.string().required("Required"),
     lastName: Yup.string().required("Required"),
     email: Yup.string().required("Required"),
-    password: Yup.string().required("Required"),
+    password: Yup.string().min(6, "Min 6 characters long").required("Required"),
     confirmPassword: Yup.string()
       .required("Required")
       .test("passwords-match", "Passwords must match", function (value) {
@@ -43,8 +47,24 @@ const RegisterPage = () => {
       birthDate: "",
     },
     validationSchema: registerSchema,
-    onSubmit: (values) => {
-      toast.success("Submit is OK!");
+
+    onSubmit: async (values) => {
+      try {
+        const newImage = await FileParser(values.image);
+        const response = await axios.post(`${baseUrl}/auth/register`, {
+          ...values,
+          image: newImage,
+        });
+        if (response.status === 200 || response.status === 201) {
+          toast.success("Registration successful!");
+          console.log(response.data);
+        } else {
+          toast.warning("Registration failed!");
+        }
+      } catch (error) {
+        toast.warning(error.response.data.msg);
+        console.log(error.response.data.msg);
+      }
       formik.resetForm();
     },
   });
