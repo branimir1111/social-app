@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { PiEyeBold, PiEyeClosedBold } from "react-icons/pi";
 import { toast } from "react-toastify";
@@ -12,6 +12,7 @@ const baseUrl = "http://localhost:4000/api/v1";
 const RegisterPage = () => {
   const [viewPass, setViewPass] = useState(true);
   const [viewConfPass, setViewConfPass] = useState(true);
+  const navigate = useNavigate();
 
   const handleViewPass = () => {
     return setViewPass(!viewPass);
@@ -57,7 +58,9 @@ const RegisterPage = () => {
         });
         if (response.status === 200 || response.status === 201) {
           toast.success("Registration successful!");
-          console.log(response.data);
+          setTimeout(() => {
+            navigate("/login");
+          }, 2000);
         } else {
           toast.warning("Registration failed!");
         }
@@ -150,6 +153,7 @@ const RegisterPage = () => {
               className="w-full rounded-[3px]  px-[5px] py-[3px] bg-[#5a5a5a]"
             />
             <button
+              type="button"
               className="absolute text-[20px] bottom-[5px] right-3 cursor-pointer  hover:text-violet-300 hover:transition-all hover:duration-300"
               onClick={handleViewPass}
             >
@@ -173,6 +177,7 @@ const RegisterPage = () => {
               className="w-full rounded-[3px]  px-[5px] py-[3px] bg-[#5a5a5a]"
             />
             <button
+              type="button"
               className="absolute text-[20px] bottom-[5px] right-3 cursor-pointer  hover:text-violet-300 hover:transition-all hover:duration-300"
               onClick={handleViewConfPass}
             >
