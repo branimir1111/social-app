@@ -6,7 +6,7 @@ import Logout from "../components/Logout";
 const Navbar = () => {
   return (
     <nav className="w-screen flex justify-center items-center py-4 bg-[#3F3F3F]">
-      <section className="w-[1280px] flex px-4 justify-between items-center  ">
+      <section className="w-[1280px] flex px-4 max-xl:w-11/12 justify-between items-center  ">
         <Logo />
         <div id="mainLinks" className="hidden md:flex text-xl text-white">
           {mainLinks.map((link) => {
@@ -31,3 +31,4 @@ const Navbar = () => {
   );
 };
 export default Navbar;
+//

@@ -1,17 +1,53 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { PiEyeBold, PiEyeClosedBold } from "react-icons/pi";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import axios from "axios";
+import { toast } from "react-toastify";
+
+const baseUrl = "http://localhost:4000/api/v1";
 
 const LoginPage = () => {
   const [viewPass, setViewPass] = useState(true);
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+  const loginSchema = Yup.object().shape({
+    email: Yup.string().required("Email is required!"),
+    password: Yup.string().required("Password is required!"),
+  });
+
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: loginSchema,
+    onSubmit: async (values) => {
+      try {
+        const response = await axios.post(`${baseUrl}/auth/login`, values);
+        if (response.status === 200) {
+          toast.success(`${response.data.msg}`);
+          setTimeout(() => {
+            navigate("/main");
+          }, 2000);
+        } else {
+          toast.error("Login failed!");
+        }
+      } catch (error) {
+        toast.error(`${error.response.data.msg}`);
+      }
+
+      formik.resetForm();
+    },
+  });
 
   const handleViewPass = () => {
     return setViewPass(!viewPass);
   };
+
+  const showError = (name) =>
+    formik.errors[name] && formik.touched[name] && formik.errors[name];
 
   return (
     <div className="w-screen h-screen flex justify-center items-center">
@@ -22,27 +58,42 @@ const LoginPage = () => {
         </div>
         {/* title  */}
         <h1 className="text-[2rem] text-violet-400 text-center">Login</h1>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={formik.handleSubmit}>
           {/* single form row */}
           <div className="mt-[10px] flex flex-col gap-2">
-            <label className="">Email</label>
+            <label className="">
+              Email{" "}
+              <span className="text-pink-500 italic text-sm">
+                {showError("email")}
+              </span>
+            </label>
             <input
               type="email"
               name="email"
+              value={formik.values.email}
+              onChange={formik.handleChange}
               placeholder="Enter email"
               className="w-full rounded-[3px] px-[5px] py-[5px] bg-[#5a5a5a]"
             />
           </div>
           {/* single form row */}
           <div className="relative mt-[10px] flex flex-col gap-2">
-            <label className="">Password</label>
+            <label className="">
+              Password{" "}
+              <span className="text-pink-500 italic text-sm">
+                {showError("password")}
+              </span>
+            </label>
             <input
               type={`${viewPass ? "password" : "text"}`}
               name="password"
+              value={formik.values.password}
+              onChange={formik.handleChange}
               placeholder="Enter password"
               className="w-full rounded-[3px] px-[5px] py-[5px] bg-[#5a5a5a]"
             />
             <button
+              type="button"
               className="absolute text-[20px] bottom-[5px] right-3 cursor-pointer hover:text-violet-300 hover:transition-all hover:duration-300"
               onClick={handleViewPass}
             >
