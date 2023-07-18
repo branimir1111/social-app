@@ -42,7 +42,6 @@ const login = async (req, res) => {
   const user = await UserModel.findOne({ email });
   // compare passwords
   const isValidUser = user && (await comparePassword(password, user.password));
-
   if (!isValidUser) {
     res.status(StatusCodes.FORBIDDEN).json({ msg: "User does not exists!" });
     return;

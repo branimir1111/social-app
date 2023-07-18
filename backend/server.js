@@ -9,8 +9,8 @@ import cookieParser from "cookie-parser";
 import authRoutes from "./routes/authRoutes.js";
 
 app.use(cors());
-app.use(express.json({ limit: "15mb" }));
 app.use(cookieParser());
+app.use(express.json({ limit: "15mb" }));
 
 app.use("/api/v1/auth/", authRoutes);
 
