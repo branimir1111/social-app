@@ -22,7 +22,7 @@ const router = createBrowserRouter([
         path: "main",
         element: <SharedLayout />,
         children: [
-          { path: "home", element: <HomePage /> },
+          { index:true, element: <HomePage /> },
           { path: "posts", element: <PostPage /> },
           { path: "ads", element: <AdsPage /> },
         ],

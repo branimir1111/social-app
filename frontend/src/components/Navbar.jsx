@@ -16,7 +16,7 @@ const Navbar = () => {
                 key={id}
                 to={url}
                 className="navbar_link mx-3 tracking-widest hover:text-violet-300 transition-all duration-200"
-              >
+              end>
                 {text}
               </NavLink>
             );
