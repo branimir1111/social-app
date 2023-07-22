@@ -1,13 +1,14 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import LandingPage from "./pages/LandingPage";
-import StartLayout from "./pages/StartLayout";
-import ErrorPage from "./pages/ErrorPage";
-import RegisterPage from "./pages/RegisterPage";
-import LoginPage from "./pages/LoginPage";
-import SharedLayout from "./pages/SharedLayout";
-import HomePage from "./pages/HomePage";
-import PostPage from "./pages/PostPage";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+
 import AdsPage from "./pages/AdsPage";
+import ErrorPage from "./pages/ErrorPage";
+import HomePage from "./pages/HomePage";
+import LandingPage from "./pages/LandingPage";
+import LoginPage from "./pages/LoginPage";
+import PostPage from "./pages/PostPage";
+import RegisterPage from "./pages/RegisterPage";
+import SharedLayout from "./pages/SharedLayout";
+import StartLayout from "./pages/StartLayout";
 
 const router = createBrowserRouter([
   {
